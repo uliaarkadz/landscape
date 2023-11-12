@@ -13,7 +13,7 @@ const player = {
   tool: 0,
   isWinner: false,
 };
-const winAmount = 10;
+const winAmount = 1000;
 
 console.log(
   " I am starting my landstpe businesss and I can cut your grass with my teath"
@@ -21,10 +21,10 @@ console.log(
 
 function useTool() {
   const tool = tools[player.tool];
-  alert(`You used ${tool} for cutting grass and made ${tool.cost} money`);
-  //let answer = prompt(`Would you like to have your grass cut with ${tool}?`);
-
-  player.bankAccount += tool.generates;
+  console.log(
+    `You used ${tool.name} for cutting grass and made ${tool.cost} money`
+  );
+  player.bankAccount += tool.cost;
 }
 
 function buyTools() {
@@ -34,40 +34,34 @@ function buyTools() {
       player.bankAccount -= nextTool.price;
       player.tool += 1;
     } else {
-      alert("Not enough money to buy a new tool");
+      console.log("Not enough money to buy a new tool");
     }
   } else {
-    alert("No more tools available to use");
+    console.log("No more tools available to use");
   }
 }
 
 function winPlayer() {
   if (player.tool == tools.length - 1 && player.bankAccount >= winAmount) {
-    alert("You are the winner");
+    console.log("You are the winner");
     player.isWinner = true;
   }
 }
-//use teeth
-useTool(5, tools[0], 1);
-//buy scisors
-buyTools(5, tools[1]);
-//use scisors
-useTool(25, tools[1], 5);
-// buy pusj lm
-buyTools(25, tools[2]);
-//use push lm
-useTool(250, tools[2], 50);
-// buy battery lm
-buyTools(250, tools[3]);
-//use battery lm
-useTool(500, tools[2], 100);
-//hire team
-buyTools(500, tools[4]);
 
-while (bankAccount < winAmount) {
-  //use team
-  useTool(1000, tools[4], 500);
-
-  console.log("You won");
-  console.log(bankAccount);
+while (!player.isWinner) {
+  let answer = prompt(
+    `You bank account currently has ${player.bankAccount} $ do you want [c]ut the grass or [b]uy a new tool?`
+  );
+  switch (answer) {
+    case "c":
+      useTool();
+      break;
+    case "b":
+      buyTools();
+      break;
+    default:
+      console.log("You used invalid option");
+      break;
+  }
+  winPlayer();
 }
