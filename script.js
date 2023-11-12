@@ -41,6 +41,12 @@ function buyTools() {
   }
 }
 
+function winPlayer() {
+  if (player.tool == tools.length - 1 && player.bankAccount >= winAmount) {
+    alert("You are the winner");
+    player.isWinner = true;
+  }
+}
 //use teeth
 useTool(5, tools[0], 1);
 //buy scisors
