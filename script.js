@@ -13,7 +13,7 @@ const player = {
   tool: 0,
   isWinner: false,
 };
-const winAmount = 1000;
+const winAmount = 10;
 
 console.log(
   " I am starting my landstpe businesss and I can cut your grass with my teath"
@@ -48,9 +48,17 @@ function winPlayer() {
   }
 }
 
+function resetGame() {
+  if (player.bankAccount > 0 || player.tool > 0 || player.isWinner) {
+    player.bankAccount = 0;
+    player.tool = 0;
+    player.isWinner = false;
+  }
+}
+
 while (!player.isWinner) {
   let answer = prompt(
-    `You bank account currently has ${player.bankAccount} $ do you want [c]ut the grass or [b]uy a new tool?`
+    `You bank account currently has ${player.bankAccount} $ do you want [c]ut the grass or [b]uy a new tool or would you like to [r]eset the game?`
   );
   switch (answer) {
     case "c":
@@ -59,9 +67,18 @@ while (!player.isWinner) {
     case "b":
       buyTools();
       break;
+    case "r":
+      resetGame();
+      break;
     default:
       console.log("You used invalid option");
       break;
   }
+
   winPlayer();
+
+  if (player.isWinner) {
+    let answer = prompt(`Would you like to [r]eset the game?`);
+    answer == "r" ? resetGame() : console.log("See you next time!");
+  }
 }
