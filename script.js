@@ -27,13 +27,17 @@ function useTool() {
   player.bankAccount += tool.generates;
 }
 
-function buyTools(price, tool) {
-  if (bankAccount >= price) {
-    let answer = prompt(`Would you like to buy ${tool}`);
-    console.log(answer);
-    if (answer.toLowerCase() === "y") {
-      bankAccount -= price;
+function buyTools() {
+  if (player.tool + 1 < tools.length) {
+    const nextTool = tools[player.tool + 1];
+    if (nextTool.price <= player.bankAccount) {
+      player.bankAccount -= nextTool.price;
+      player.tool += 1;
+    } else {
+      alert("Not enough money to buy a new tool");
     }
+  } else {
+    alert("No more tools available to use");
   }
 }
 
