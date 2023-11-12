@@ -1,7 +1,12 @@
 const prompt = require("prompt-sync")();
 
 //create function to use tolls to cut garss -- teeth
-const tools = ["teeth", "scissors", "old-timey push lawnmower"];
+const tools = [
+  "teeth",
+  "scissors",
+  "old-timey push lawnmower",
+  "battery-powered lawnmower",
+];
 let bankAccount = 0;
 
 console.log(
@@ -28,10 +33,17 @@ function buyTools(price, tool) {
     }
   }
 }
-
+//use teeth
 useTool(5, tools[0], 1);
+//buy scisors
 buyTools(5, tools[1]);
+//use scisors
 useTool(25, tools[1], 5);
+// buy pusj lm
 buyTools(25, tools[2]);
+//use push lm
+useTool(250, tools[2], 50);
+// buy battery lm
+buyTools(25, tools[3]);
 
 console.log(bankAccount);
